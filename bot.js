@@ -7,13 +7,13 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/com/;
       //botRegexTeam = /^\/i;
-      botRegexDepth = /^\/DDL/i;
+      botRegexDepth = /^\/D/i;
       botRegexRules = /^\/rules/;
       botRegexStrikes = /^\/strikes/;
       botRegexNameChange = /^\/nc/;
-      botRegexSchedule = /^\/SDL/i;
+      botRegexSchedule = /^\/S/i;
       botODB = /(.*\s+)(.*odb)(\s+.*)/i;
-      botRegexP = /^\/PDL/i;
+      botRegexP = /^\/P/i;
       botRegexTw = /^\/twitch/i;
       botRegexUsers = /^\/users/;
       botRegexRatings = /^\/ratings/; 
@@ -24,7 +24,7 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("./d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
+    postMessage(" /d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
     this.res.end();
   }
   //else if(request.text && botRegexTeam.test(request.text)) {
