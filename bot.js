@@ -6,16 +6,17 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/com/;
-      botRegexDL = /^\/DDL/i;
+      botRegexTeam = /^\/i;
+      botRegexDepth = /^\/d/i;
       botRegexRules = /^\/rules/;
       botRegexStrikes = /^\/strikes/;
-      botRegexNC = /^\/nc/;
-      botRegexSC = /^\/SDL/i;
+      botRegexNameChange = /^\/nc/;
+      botRegexSchedule = /^\/s/i;
       botODB = /(.*\s+)(.*odb)(\s+.*)/i;
-      botRegexP = /^\/PDL/i;
+      botRegexP = /^\/p/i;
       botRegexTw = /^\/twitch/i;
-      botRegexWk = /^\/users/;
-      botRegexOW = /^\/ratings/; 
+      botRegexUsers = /^\/users/;
+      botRegexRatings = /^\/ratings/; 
       botRegexPen = /^\/pending/;
       botRegexTrade = /^\/trade/; 
   var teamAb = ["NE","NO","ARI","PHI","CLE","TEN","OAK","DAL","IND","SEA","CIN","PIT","JAC"
@@ -23,16 +24,21 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("/DDL/i , /rules , /strikes , /SDL/i , /PDL/i , /twitch/i , /users , /ratings , /pending (WIP) , /trade (WIP)");
+    postMessage("'/d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings'");
     this.res.end();
   }
-  else if(request.text && botRegexDL.test(request.text)) {
+  else if(request.text && botRegexTeam.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"");
+    this.res.end();
+  } 
+  else if(request.text && botRegexDepth.test(request.text)) {
     this.res.writeHead(200);
     //postMessage("http://www.daddyleagues.com/maddenrating?name=&position=all&team="+request.text.substring(5,8));
     postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"/depthchart");
     this.res.end();
   } 
-  else if(request.text && botRegexOW.test(request.text)) {
+  else if(request.text && botRegexRatings.test(request.text)) {
     this.res.writeHead(200);
     postMessage("www.daddyleagues.com/maddenrating/");
     this.res.end();
@@ -47,12 +53,12 @@ function respond() {
     postMessage("https://docs.google.com/spreadsheets/d/1H83DERNFxIE6N9Sgr2bd7dbSTW48FP1_shzdRiG5pjY/view#gid=0");
     this.res.end();
   } 
-  else if(request.text && botRegexNC.test(request.text)) {
+  else if(request.text && botRegexNameChange.test(request.text)) {
     this.res.writeHead(200);
     postMessage("https://docs.google.com/spreadsheets/d/1H83DERNFxIE6N9Sgr2bd7dbSTW48FP1_shzdRiG5pjY/view#gid=831861622");
     this.res.end();
   } 
-  else if(request.text && botRegexSC.test(request.text)) {
+  else if(request.text && botRegexSchedule.test(request.text)) {
     this.res.writeHead(200);
     postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"/schedule");
     this.res.end();
@@ -69,7 +75,7 @@ function respond() {
     postMessage("http://www.twitch.tv/"+request.text.substring(8,request.text.length));
     this.res.end();
   } 
-  else if(request.text && botRegexWk.test(request.text)) {
+  else if(request.text && botRegexUsers.test(request.text)) {
     this.res.writeHead(200);
     postMessage("https://docs.google.com/spreadsheets/d/17e5rydAn2cj66x8iXPUf4jMYpVY8Q4S1xJTmewji9Ug/edit?usp=sharing");
     this.res.end();
