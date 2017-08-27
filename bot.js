@@ -23,7 +23,7 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("/DDL/i , /rules , /strikes , /SDL/i , /PDL/i , /twitch/i , /users , /ratings , /pending (WIP) , /trade (WIP));
+    postMessage("/DDL/i , /rules , /strikes , /SDL/i , /PDL/i , /twitch/i , /users , /ratings , /pending (WIP) , /trade (WIP)");
     this.res.end();
   }
   else if(request.text && botRegexDL.test(request.text)) {
