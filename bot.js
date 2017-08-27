@@ -6,7 +6,7 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/com/;
-      //botRegexTeam = /^\/i;
+      botRegexTeam = /^\/i;
       botRegexDepth = /^\/D/i;
       botRegexRules = /^\/rules/;
       botRegexStrikes = /^\/strikes/;
@@ -24,18 +24,18 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(" /d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
+    postMessage(" /i = team , /d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
     this.res.end();
   }
-  //else if(request.text && botRegexTeam.test(request.text)) {
-    //this.res.writeHead(200);
-    //postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"");
-    //this.res.end();
-  //} 
+  else if(request.text && botRegexTeam.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(2,3));
+    this.res.end();
+  } 
   else if(request.text && botRegexDepth.test(request.text)) {
     this.res.writeHead(200);
     //postMessage("http://www.daddyleagues.com/maddenrating?name=&position=all&team="+request.text.substring(5,8));
-    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"/depthchart");
+    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(3,6)+"/depthchart");
     this.res.end();
   } 
   else if(request.text && botRegexRatings.test(request.text)) {
@@ -60,12 +60,12 @@ function respond() {
   } 
   else if(request.text && botRegexSchedule.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"/schedule");
+    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(3,6)+"/schedule");
     this.res.end();
   }
   else if(request.text && botRegexP.test(request.text)) {
     this.res.writeHead(200);
-    var req = request.text.substring(5,request.text.length);
+    var req = request.text.substring(3,request.text.length);
     var rep = req.replace(/ /,"+");
     postMessage("http://daddyleagues.com/shomadden/players?name="+rep+"&position=all&team=all");
     this.res.end();
