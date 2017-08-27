@@ -6,7 +6,7 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/com/;
-      //botRegexTeam = /^\/i;
+      botRegexTeam = /^\/T/i;
       botRegexDepth = /^\/D/i;
       botRegexRules = /^\/rules/;
       botRegexStrikes = /^\/strikes/;
@@ -24,12 +24,12 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(" /i = team , /d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
+    postMessage(" /t/i = team , /d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
     this.res.end();
   }
   else if(request.text && botRegexTeam.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(2,3));
+    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(3,6));
     this.res.end();
   } 
   else if(request.text && botRegexDepth.test(request.text)) {
