@@ -6,14 +6,14 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/com/;
-      botRegexTeam = /^\/i;
-      botRegexDepth = /^\/d/i;
+      //botRegexTeam = /^\/i;
+      botRegexDepth = /^\/DDL/i;
       botRegexRules = /^\/rules/;
       botRegexStrikes = /^\/strikes/;
       botRegexNameChange = /^\/nc/;
-      botRegexSchedule = /^\/s/i;
+      botRegexSchedule = /^\/SDL/i;
       botODB = /(.*\s+)(.*odb)(\s+.*)/i;
-      botRegexP = /^\/p/i;
+      botRegexP = /^\/PDL/i;
       botRegexTw = /^\/twitch/i;
       botRegexUsers = /^\/users/;
       botRegexRatings = /^\/ratings/; 
@@ -24,14 +24,14 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("'/d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings'");
+    postMessage("./d/i = depth chart , /rules , /strikes , /s/i = team schedule , /p/i = player lookup , /twitch/i , /users , /ratings");
     this.res.end();
   }
-  else if(request.text && botRegexTeam.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"");
-    this.res.end();
-  } 
+  //else if(request.text && botRegexTeam.test(request.text)) {
+    //this.res.writeHead(200);
+    //postMessage("http://daddyleagues.com/shomadden/team/"+request.text.substring(5,8)+"");
+    //this.res.end();
+  //} 
   else if(request.text && botRegexDepth.test(request.text)) {
     this.res.writeHead(200);
     //postMessage("http://www.daddyleagues.com/maddenrating?name=&position=all&team="+request.text.substring(5,8));
